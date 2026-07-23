@@ -170,7 +170,7 @@ changeChance: 0.016,
         // Randabstand für Spawn-Positionen
         frontFloatSpawnMargin: 0.03,
 
-        showHud: false,
+        showHud: true,
 
         characters: "01"
     };
