@@ -170,7 +170,7 @@ changeChance: 0.016,
         // Randabstand für Spawn-Positionen
         frontFloatSpawnMargin: 0.03,
 
-        showHud: true,
+        showHud: false,
 
         characters: "01"
     };
@@ -443,7 +443,7 @@ changeChance: 0.016,
     function findOpaqueBounds() {
         const tempCanvas = document.createElement("canvas");
         const tempCtx = tempCanvas.getContext("2d", {
-            willReadFrequently: true
+            willReadFrequently: 
         });
 
         tempCanvas.width = image.naturalWidth;
