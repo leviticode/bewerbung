@@ -45,4 +45,5 @@ body {
     pointer-events: none;
     user-select: text;
     backdrop-filter: blur(6px);
+    display: none !important;
 }
