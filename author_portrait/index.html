@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Portrait</title>
+    <link rel="stylesheet" href="stylesheet/style.css">
+    <link rel="stylesheet" href="../navigation.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="nav-inner">
+
+            <a class="nav-brand" href="../index.html#top">
+                <span>&gt;</span> Danial's Bewerbung
+            </a>
+
+            <button class="nav-toggle"
+                    type="button"
+                    aria-label="Navigation öffnen"
+                    aria-controls="mainNavigation"
+                    aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav id="mainNavigation"
+                 class="nav-links"
+                 aria-label="Hauptnavigation">
+                <a class="nav-link" href="../index.html#lebenslauf">
+                    Lebenslauf
+                </a>
+
+                <a class="nav-link" href="../index.html#skills">
+                    Skills
+                </a>
+
+                <a class="nav-link"
+                   href="index.html"
+                   aria-current="page">
+                    Author
+                </a>
+
+                <a class="nav-link"
+                   href="../impressum_dsgvo/impressum.html">
+                    Impressum
+                </a>
+            </nav>
+        </div>
+
+        <div class="nav-laser" aria-hidden="true"></div>
+    </header>
+
+    <section class="matrix-section">
+        <canvas id="matrixPortrait"
+                data-portrait="images/portrait.png"
+                aria-label="Dynamisches Matrix-Porträt"></canvas>
+
+        <div id="matrixHud" class="matrix-hud"></div>
+    </section>
+
+    <script src="main.js"></script>
+    <script src="../navigation.js"></script>
+</body>
+</html>
