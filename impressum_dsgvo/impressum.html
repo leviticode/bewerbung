@@ -1,3 +1,727 @@
+<!-- Style CSS --------------------------------------------------------------------->
+
+<style>
+  :root {
+    color-scheme: dark;
+
+    --matrix-green: #00ff66;
+    --matrix-green-soft: #00b84a;
+
+    --background: #020503;
+    --background-light: #07100a;
+    --panel: rgba(4, 14, 7, 0.82);
+    --panel-soft: rgba(4, 10, 6, 0.62);
+
+    --text: #effff4;
+    --text-soft: rgba(226, 255, 237, 0.8);
+    --text-muted: rgba(220, 255, 235, 0.62);
+
+    --border: rgba(0, 255, 102, 0.16);
+    --border-strong: rgba(0, 255, 102, 0.38);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-height: 100%;
+    scroll-behavior: smooth;
+    scrollbar-color: rgba(0, 255, 102, 0.45) #020503;
+    background: var(--background);
+  }
+
+  body {
+    position: relative;
+    isolation: isolate;
+
+    width: min(1040px, calc(100% - 3rem));
+    min-height: 100vh;
+
+    margin: 0 auto;
+    padding: clamp(4.5rem, 8vw, 7rem) 0 7rem;
+
+    overflow-x: hidden;
+
+    color: var(--text-soft);
+    font-family:
+      Inter,
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  /*
+   * Vollflächiger Hintergrund.
+   * Funktioniert auch, obwohl der Body selbst begrenzt ist.
+   */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+
+    background:
+      radial-gradient(
+        circle at 50% 8%,
+        rgba(0, 255, 102, 0.075),
+        transparent 34%
+      ),
+      radial-gradient(
+        circle at 85% 58%,
+        rgba(0, 255, 102, 0.035),
+        transparent 28%
+      ),
+      linear-gradient(
+        180deg,
+        #020503 0%,
+        #07100a 42%,
+        #040705 76%,
+        #020503 100%
+      );
+  }
+
+  /*
+   * Dezentes Raster wie im Skills-Bereich.
+   */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    opacity: 0.2;
+
+    background-image:
+      linear-gradient(
+        rgba(0, 255, 102, 0.035) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(0, 255, 102, 0.035) 1px,
+        transparent 1px
+      );
+
+    background-size: 48px 48px;
+
+    mask-image:
+      linear-gradient(
+        to bottom,
+        transparent,
+        #000 8%,
+        #000 92%,
+        transparent
+      );
+  }
+
+  ::selection {
+    color: #020503;
+    background: var(--matrix-green);
+  }
+
+  /*
+   * Die drei freien <br>-Elemente vor der
+   * Datenschutzerklärung werden ausgeblendet.
+   */
+  body > br {
+    display: none;
+  }
+
+  /* ==========================================================
+     Hauptüberschrift: Impressum
+     ========================================================== */
+
+  body > h2:first-child {
+    position: relative;
+
+    margin: 0;
+    padding: 0 0 1.6rem 0;
+
+    color: var(--text);
+
+    font-family:
+      "Cascadia Code",
+      "Cascadia Mono",
+      Consolas,
+      "Courier New",
+      monospace;
+
+    font-size: clamp(3.6rem, 10vw, 7.4rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.065em;
+
+    border-bottom: 1px solid rgba(0, 255, 102, 0.16);
+
+    text-shadow:
+      0 0 14px rgba(0, 255, 102, 0.14),
+      0 0 46px rgba(0, 255, 102, 0.07);
+  }
+
+  body > h2:first-child::before {
+    content: ">";
+
+    margin-right: 0.22em;
+
+    color: var(--matrix-green);
+
+    text-shadow:
+      0 0 10px rgba(0, 255, 102, 0.8),
+      0 0 28px rgba(0, 255, 102, 0.32);
+  }
+
+  body > h2:first-child::after {
+    content: "LEGAL_INFORMATION // DDG";
+
+    position: absolute;
+    right: 0;
+    bottom: 1.9rem;
+
+    color: rgba(0, 255, 102, 0.32);
+
+    font-size: 0.7rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.16em;
+
+    text-shadow: none;
+  }
+
+  /*
+   * „Angaben gemäß § 5 DDG“
+   */
+  body > h2:first-child + p {
+    margin: 1rem 0 2rem;
+
+    color: rgba(0, 255, 102, 0.66);
+
+    font-family:
+      "Cascadia Code",
+      "Cascadia Mono",
+      Consolas,
+      monospace;
+
+    font-size: 0.8rem;
+    line-height: 1.5;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /*
+   * Die ersten Impressumsabsätze bilden gemeinsam
+   * einen zusammenhängenden Informationskasten.
+   */
+  body > p:nth-of-type(n + 2):nth-of-type(-n + 6) {
+    margin: 0;
+    padding: 1rem 1.4rem;
+
+    border-right: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(7, 18, 10, 0.9),
+        rgba(2, 8, 4, 0.74)
+      );
+
+    box-shadow:
+      inset 0 0 24px rgba(0, 255, 102, 0.018);
+
+    overflow-wrap: anywhere;
+  }
+
+  body > p:nth-of-type(2) {
+    padding-top: 1.4rem;
+
+    border-top: 1px solid var(--border-strong);
+
+    box-shadow:
+      0 0 28px rgba(0, 255, 102, 0.055),
+      inset 0 0 24px rgba(0, 255, 102, 0.018);
+  }
+
+  body > p:nth-of-type(n + 3):nth-of-type(-n + 6) {
+    border-top: 1px solid rgba(0, 255, 102, 0.085);
+  }
+
+  body > p:nth-of-type(6) {
+    padding-bottom: 1.4rem;
+
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ==========================================================
+     Hauptüberschrift: Datenschutzerklärung
+     ========================================================== */
+
+  h1 {
+    position: relative;
+
+    margin: clamp(6rem, 11vw, 9rem) 0 4rem;
+    padding: 3.5rem 0 0;
+
+    color: var(--text);
+
+    font-family:
+      "Cascadia Code",
+      "Cascadia Mono",
+      Consolas,
+      "Courier New",
+      monospace;
+
+    font-size: clamp(3rem, 8vw, 6.4rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+
+    border-top: 1px solid rgba(0, 255, 102, 0.18);
+
+    overflow-wrap: anywhere;
+
+    text-shadow:
+      0 0 14px rgba(0, 255, 102, 0.12),
+      0 0 46px rgba(0, 255, 102, 0.06);
+  }
+
+  h1::before {
+    content: "PRIVACY_PROTOCOL";
+
+    display: block;
+
+    margin-bottom: 1.1rem;
+
+    color: rgba(0, 255, 102, 0.58);
+
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.2em;
+  }
+
+  /* ==========================================================
+     Nummerierte Hauptabschnitte der Datenschutzerklärung
+     ========================================================== */
+
+  h2:not(:first-child) {
+    position: relative;
+
+    margin: 4.5rem 0 1.8rem;
+    padding: 1.25rem 1.4rem 1.25rem 3.2rem;
+
+    color: var(--text);
+
+    font-family:
+      "Cascadia Code",
+      "Cascadia Mono",
+      Consolas,
+      "Courier New",
+      monospace;
+
+    font-size: clamp(1.45rem, 4vw, 2.15rem);
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+
+    border: 1px solid rgba(0, 255, 102, 0.18);
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(7, 18, 10, 0.9),
+        rgba(2, 8, 4, 0.72)
+      );
+
+    box-shadow:
+      0 16px 45px rgba(0, 0, 0, 0.28),
+      inset 0 0 24px rgba(0, 255, 102, 0.024);
+  }
+
+  h2:not(:first-child)::before {
+    content: ">";
+
+    position: absolute;
+    top: 1.25rem;
+    left: 1.35rem;
+
+    color: var(--matrix-green);
+
+    text-shadow:
+      0 0 8px rgba(0, 255, 102, 0.62),
+      0 0 18px rgba(0, 255, 102, 0.22);
+  }
+
+  h2:not(:first-child)::after {
+    content: "";
+
+    position: absolute;
+    top: -1px;
+    left: 0;
+
+    width: 30%;
+    height: 1px;
+
+    background:
+      linear-gradient(
+        90deg,
+        transparent,
+        var(--matrix-green),
+        transparent
+      );
+
+    box-shadow: 0 0 12px rgba(0, 255, 102, 0.65);
+  }
+
+  /* ==========================================================
+     Unterüberschriften
+     ========================================================== */
+
+  h3 {
+    margin: 3rem 0 1rem;
+    padding-left: 1rem;
+
+    color: rgba(239, 255, 244, 0.94);
+
+    font-family:
+      "Cascadia Code",
+      "Cascadia Mono",
+      Consolas,
+      monospace;
+
+    font-size: clamp(1.15rem, 2.8vw, 1.5rem);
+    line-height: 1.4;
+    letter-spacing: -0.015em;
+
+    border-left: 3px solid rgba(0, 255, 102, 0.65);
+
+    overflow-wrap: anywhere;
+  }
+
+  h4 {
+    margin: 2rem 0 0.75rem;
+
+    color: rgba(0, 255, 102, 0.82);
+
+    font-family:
+      "Cascadia Code",
+      "Cascadia Mono",
+      Consolas,
+      monospace;
+
+    font-size: 0.95rem;
+    line-height: 1.5;
+    letter-spacing: 0.015em;
+
+    overflow-wrap: anywhere;
+  }
+
+  h4::before {
+    content: "$ ";
+
+    color: var(--matrix-green);
+
+    text-shadow: 0 0 7px rgba(0, 255, 102, 0.5);
+  }
+
+  /* ==========================================================
+     Fließtext
+     ========================================================== */
+
+  p {
+    max-width: 86ch;
+
+    margin: 0.8rem 0;
+
+    color: var(--text-muted);
+
+    font-size: 1rem;
+    line-height: 1.78;
+
+    hyphens: auto;
+    overflow-wrap: anywhere;
+  }
+
+  strong {
+    color: rgba(239, 255, 244, 0.94);
+    font-weight: 650;
+  }
+
+  /* ==========================================================
+     Links
+     ========================================================== */
+
+  a {
+    color: var(--matrix-green);
+
+    text-decoration-line: underline;
+    text-decoration-color: rgba(0, 255, 102, 0.32);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22rem;
+
+    overflow-wrap: anywhere;
+
+    text-shadow: 0 0 8px rgba(0, 255, 102, 0.22);
+
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease,
+      text-shadow 0.2s ease;
+  }
+
+  a:hover,
+  a:focus-visible {
+    color: #caffda;
+
+    text-decoration-color: var(--matrix-green);
+
+    text-shadow:
+      0 0 8px rgba(0, 255, 102, 0.55),
+      0 0 18px rgba(0, 255, 102, 0.2);
+
+    outline: none;
+  }
+
+  a:focus-visible {
+    border-radius: 2px;
+    outline: 1px solid rgba(0, 255, 102, 0.75);
+    outline-offset: 4px;
+  }
+
+  /* ==========================================================
+     Aufzählungen
+     ========================================================== */
+
+  ul {
+    max-width: 86ch;
+
+    margin: 1.25rem 0 2rem;
+    padding: 1.3rem 1.4rem 1.3rem 3rem;
+
+    border: 1px solid rgba(0, 255, 102, 0.12);
+
+    background: rgba(0, 255, 102, 0.025);
+
+    box-shadow:
+      inset 0 0 20px rgba(0, 255, 102, 0.018);
+  }
+
+  li {
+    margin: 0.65rem 0;
+
+    color: var(--text-muted);
+
+    line-height: 1.72;
+
+    overflow-wrap: anywhere;
+  }
+
+  li::marker {
+    color: var(--matrix-green);
+  }
+
+  /* ==========================================================
+     Mobile Ansicht
+     ========================================================== */
+
+  @media (max-width: 760px) {
+    body {
+      width: calc(100% - 2rem);
+      padding: 3.5rem 0 5rem;
+
+      font-size: 0.94rem;
+    }
+
+    body > h2:first-child {
+      padding-bottom: 1.25rem;
+
+      font-size: clamp(3rem, 16vw, 4.8rem);
+      line-height: 0.92;
+    }
+
+    body > h2:first-child::after {
+      display: none;
+    }
+
+    body > h2:first-child + p {
+      margin-top: 0.8rem;
+      margin-bottom: 1.5rem;
+
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+    }
+
+    body > p:nth-of-type(n + 2):nth-of-type(-n + 6) {
+      padding: 0.9rem 1rem;
+    }
+
+    body > p:nth-of-type(2) {
+      padding-top: 1.15rem;
+    }
+
+    body > p:nth-of-type(6) {
+      padding-bottom: 1.15rem;
+    }
+
+    h1 {
+      margin-top: 5.5rem;
+      margin-bottom: 3rem;
+      padding-top: 2.5rem;
+
+      font-size: clamp(2.75rem, 14vw, 4.5rem);
+    }
+
+    h1::before {
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+    }
+
+    h2:not(:first-child) {
+      margin-top: 3.5rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem 1rem 1rem 2.6rem;
+
+      font-size: clamp(1.25rem, 6vw, 1.65rem);
+    }
+
+    h2:not(:first-child)::before {
+      top: 1rem;
+      left: 1rem;
+    }
+
+    h3 {
+      margin-top: 2.5rem;
+
+      font-size: clamp(1.08rem, 5vw, 1.3rem);
+    }
+
+    h4 {
+      margin-top: 1.65rem;
+
+      font-size: 0.9rem;
+    }
+
+    p {
+      font-size: 0.93rem;
+      line-height: 1.72;
+    }
+
+    ul {
+      padding: 1rem 1rem 1rem 2.4rem;
+    }
+
+    li {
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+  }
+
+  @media (max-width: 390px) {
+    body {
+      width: calc(100% - 1.5rem);
+      padding-top: 2.75rem;
+    }
+
+    body > h2:first-child {
+      font-size: clamp(2.65rem, 15vw, 3.7rem);
+    }
+
+    body > p:nth-of-type(n + 2):nth-of-type(-n + 6) {
+      padding-inline: 0.85rem;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 13vw, 3.6rem);
+    }
+
+    h2:not(:first-child) {
+      padding-right: 0.8rem;
+      font-size: 1.2rem;
+    }
+
+    p,
+    li {
+      font-size: 0.89rem;
+    }
+  }
+
+  /* ==========================================================
+     Reduzierte Animationen
+     ========================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      transition: none !important;
+    }
+  }
+
+  /* ==========================================================
+     Druckansicht
+     ========================================================== */
+
+  @media print {
+    :root {
+      color-scheme: light;
+    }
+
+    html,
+    body {
+      background: #ffffff;
+    }
+
+    body {
+      width: 100%;
+      padding: 0;
+
+      color: #111111;
+    }
+
+    body::before,
+    body::after {
+      display: none;
+    }
+
+    body > h2:first-child,
+    h1,
+    h2,
+    h3,
+    h4,
+    strong {
+      color: #000000;
+      text-shadow: none;
+    }
+
+    body > p:nth-of-type(n + 2):nth-of-type(-n + 6),
+    h2:not(:first-child),
+    ul {
+      color: #111111;
+      background: transparent;
+      border-color: #bbbbbb;
+      box-shadow: none;
+    }
+
+    p,
+    li {
+      color: #222222;
+    }
+
+    a {
+      color: #000000;
+      text-shadow: none;
+    }
+  }
+</style>
+
 <!-- Impressum --------------------------------------------------------------------->
 
 <h2>Impressum</h2> 
@@ -12,7 +736,7 @@ Danial Dawod<br>
 </p> 
 <p><strong>Kontakt:</strong> <br>
 Telefon: +49-1766035420<br>
-E-Mail: <a href="danialdawod@gmx.de'">danialdawod@gmx.de</a></br></p> 
+E-Mail: <a href="mailto:danialdawod@gmx.de">danialdawod@gmx.de</a><br></p> 
 <p><strong>Verbraucherstreitbeilegung / Universalschlichtungsstelle</strong>
 <br>Wir nehmen nicht an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teil und sind dazu auch nicht verpflichtet.
 </p> 
