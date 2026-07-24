@@ -46,3 +46,119 @@ body {
     user-select: text;
     backdrop-filter: blur(6px);
 }
+
+/* News Banner ***********************************************************/
+
+.news-ticker {
+    position: relative;
+    z-index: 5;
+
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+
+    width: 100%;
+    height: 38px;
+    margin-top: 78px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 30, 12, 0.98),
+            rgba(0, 10, 4, 0.98)
+        );
+
+    border-top: 1px solid rgba(0, 255, 102, 0.35);
+    border-bottom: 1px solid rgba(0, 255, 102, 0.45);
+
+    color: #dffff0;
+
+    font-family:
+        "Cascadia Code",
+        "Cascadia Mono",
+        Consolas,
+        monospace;
+
+    box-shadow:
+        0 0 18px rgba(0, 255, 102, 0.12),
+        inset 0 0 14px rgba(0, 255, 102, 0.035);
+}
+
+.news-ticker__label {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 1.1rem;
+
+    background: #00ff66;
+    color: #001a09;
+
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+
+    box-shadow: 8px 0 18px rgba(0, 0, 0, 0.5);
+}
+
+.news-ticker__viewport {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.news-ticker__text {
+    flex: 0 0 auto;
+
+    min-width: max-content;
+    margin: 0;
+    padding-left: 100%;
+
+    color: rgba(223, 255, 240, 0.9);
+
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.035em;
+    white-space: nowrap;
+
+    text-shadow:
+        0 0 7px rgba(0, 255, 102, 0.45);
+
+    animation: newsTickerMove 19s linear infinite;
+}
+
+@keyframes newsTickerMove {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.news-ticker:hover .news-ticker__text {
+    animation-play-state: paused;
+}
+
+@media (max-width: 760px) {
+    .news-ticker {
+        height: 34px;
+        margin-top: 68px;
+    }
+
+    .news-ticker__label {
+        padding-inline: 0.7rem;
+        font-size: 0.62rem;
+    }
+
+    .news-ticker__text {
+        font-size: 0.72rem;
+        animation-duration: 22s;
+    }
+}
