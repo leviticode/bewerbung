@@ -1450,6 +1450,247 @@
         opacity: .65;
       }
     }
+
+/* Learning Roadmap */
+.learning-section {
+  position: relative;
+  z-index: 3;
+  padding: 8rem 1.5rem 10rem;
+  overflow: hidden;
+  color: #dfffea;
+  border-top: 1px solid rgba(0, 255, 102, 0.08);
+  background:
+    radial-gradient(
+      circle at 75% 20%,
+      rgba(0, 255, 102, 0.055),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(0, 255, 102, 0.035),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      #020503 0%,
+      #07100a 50%,
+      #030604 100%
+    );
+}
+
+.learning-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.2;
+  background-image:
+    linear-gradient(
+      rgba(0, 255, 102, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 255, 102, 0.035) 1px,
+      transparent 1px
+    );
+  background-size: 48px 48px;
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent,
+      #000 14%,
+      #000 86%,
+      transparent
+    );
+}
+
+.learning-inner {
+  position: relative;
+  width: min(1180px, 94vw);
+  margin: 0 auto;
+}
+
+.learning-heading-row {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.learning-heading-row .section-title {
+  margin-bottom: 0;
+}
+
+.learning-intro {
+  max-width: 48ch;
+  margin: 0 0 0.5rem;
+  color: rgba(220, 255, 235, 0.62);
+  line-height: 1.7;
+  font-size: 0.98rem;
+}
+
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.roadmap-card {
+  grid-column: auto;
+  min-width: 0;
+  padding: 1.7rem;
+}
+
+.roadmap-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.roadmap-card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-width: 0;
+}
+
+.roadmap-card h3 {
+  margin: 0;
+  color: #effff4;
+  font-family:
+    "Cascadia Code",
+    "Cascadia Mono",
+    Consolas,
+    monospace;
+  font-size: clamp(1.2rem, 2.3vw, 1.65rem);
+  overflow-wrap: anywhere;
+}
+
+.roadmap-status {
+  flex: 0 0 auto;
+  padding: 0.38rem 0.55rem;
+  border: 1px solid rgba(0, 255, 102, 0.32);
+  background: rgba(0, 255, 102, 0.055);
+  color: #00ff66;
+  font-family:
+    "Cascadia Code",
+    "Cascadia Mono",
+    Consolas,
+    monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.38);
+}
+
+.roadmap-description {
+  margin: 0;
+  color: rgba(226, 255, 237, 0.7);
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+
+.roadmap-command {
+  display: block;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 255, 102, 0.1);
+  color: rgba(0, 255, 102, 0.7);
+  font-family:
+    "Cascadia Code",
+    "Cascadia Mono",
+    Consolas,
+    monospace;
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.roadmap-command::before {
+  content: "> ";
+  color: #00ff66;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.55);
+}
+
+/* Learning Roadmap – Tablet */
+@media (max-width: 900px) {
+  .learning-heading-row {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 3rem;
+  }
+
+  .learning-intro {
+    max-width: 60ch;
+  }
+
+  .roadmap-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Learning Roadmap – Smartphone */
+@media (max-width: 760px) {
+  .learning-section {
+    width: 100%;
+    padding: 6rem 1rem 7rem;
+  }
+
+  .learning-inner {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .roadmap-grid {
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .roadmap-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 1.15rem;
+  }
+
+  .roadmap-card-header {
+    align-items: flex-start;
+  }
+
+  .roadmap-card-title {
+    gap: 0.7rem;
+  }
+
+  .roadmap-card h3 {
+    font-size: clamp(1.15rem, 6vw, 1.55rem);
+  }
+
+  .roadmap-status {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .roadmap-card-header {
+    flex-direction: column;
+  }
+
+  .roadmap-status {
+    margin-left: 3rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .learning-section {
+    padding-inline: 0.75rem;
+  }
+}
+
+    
   </style>
   
   <link rel="icon" href="/media/favicon.svg" type="image/svg+xml">
